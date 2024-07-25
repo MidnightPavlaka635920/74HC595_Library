@@ -73,98 +73,70 @@ void displayShowCharacter(int character){ //B00000000
 }
 
 
-void displayShowNumbers(String number){
+void displayShowNumbers(String number) {
   int length = number.length(); // Get the length of the input string
-  
-  if (length == 4) {
-    // Execute this block of code if the length is 4
-    int numbers = number.toInt();
-    int digit1 = numbers / 1000; // Extract thousands place digit
-    int digit2 = (numbers % 1000) / 100; // Extract hundreds place digit
-    int digit3 = (numbers % 100) / 10; // Extract tens place digit
-    int digit4 = numbers % 10; // Extract ones place digit
-    
-    // Shift out the segment patterns for each digit
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit4]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit3]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit2]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit1]);
-    digitalWrite(latchPin, HIGH);
-  } 
-  else if (length == 3) {
-    // Execute this block of code if the length is 3
-    int numbers = number.toInt();
-    int digit1 = numbers / 100; // Extract hundreds place digit
-    int digit2 = (numbers % 100) / 10; // Extract tens place digit
-    int digit3 = numbers % 10; // Extract ones place digit
-    
-    // Shift out the segment patterns for each digit
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit3]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit2]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit1]);
-    digitalWrite(latchPin, HIGH);
-    
-    // Display a blank digit for the thousands place
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[17]);
-    digitalWrite(latchPin, HIGH);
-  }
-  else if (length == 2) {
-    // Execute this block of code if the length is 2
-    int numbers = number.toInt();
-    int digit1 = numbers / 10; // Extract tens place digit
-    int digit2 = numbers % 10; // Extract ones place digit
-    
-    // Shift out the segment patterns for each digit
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit2]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit1]);
-    digitalWrite(latchPin, HIGH);
-    
-    // Display blank digits for the thousands and hundreds places
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[17]);
-    digitalWrite(latchPin, HIGH);
-  
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[17]);
-    digitalWrite(latchPin, HIGH);
-  }
-  else if (length == 1) {
-    // Execute this block of code if the length is 1
-    int numbers = number.toInt();
-    int digit1 = numbers % 10; // Extract ones place digit
-    
-    // Shift out the segment patterns for each digit
-    digitalWrite(latchPin, LOW);
-    shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit1]);
-    digitalWrite(latchPin, HIGH);
-    
-    // Display blank digits for the thousands, hundreds, and tens places
-    for (int i = 0; i < 3; i++) {
-      digitalWrite(latchPin, LOW);
-      shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[17]);
-      digitalWrite(latchPin, HIGH);
+
+  // Initialize digits and decimal points
+  int digit1 = 17, digit2 = 17, digit3 = 17, digit4 = 17;
+  bool decimal1 = false, decimal2 = false, decimal3 = false, decimal4 = false;
+
+  // Check for decimal points
+  int decimalIndex = number.indexOf('.');
+  if (decimalIndex != -1) {
+    number.remove(decimalIndex, 1); // Remove the decimal point from the string
+    length--;
+    switch (decimalIndex) {
+      case 0: decimal4 = true; break;
+      case 1: decimal3 = true; break;
+      case 2: decimal2 = true; break;
+      case 3: decimal1 = true; break;
     }
   }
+
+  // Parse the number and assign digits
+  int numbers = number.toInt();
+  switch (length) {
+    case 4:
+      digit1 = numbers / 1000; // Extract thousands place digit
+      digit2 = (numbers % 1000) / 100; // Extract hundreds place digit
+      digit3 = (numbers % 100) / 10; // Extract tens place digit
+      digit4 = numbers % 10; // Extract ones place digit
+      break;
+    case 3:
+      digit1 = 17; // Blank
+      digit2 = numbers / 100; // Extract hundreds place digit
+      digit3 = (numbers % 100) / 10; // Extract tens place digit
+      digit4 = numbers % 10; // Extract ones place digit
+      break;
+    case 2:
+      digit1 = 17; // Blank
+      digit2 = 17; // Blank
+      digit3 = numbers / 10; // Extract tens place digit
+      digit4 = numbers % 10; // Extract ones place digit
+      break;
+    case 1:
+      digit1 = 17; // Blank
+      digit2 = 17; // Blank
+      digit3 = 17; // Blank
+      digit4 = numbers % 10; // Extract ones place digit
+      break;
+  }
+
+  // Shift out the segment patterns for each digit, including decimal points
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit4] | (decimal4 ? B00000001 : 0));
+  digitalWrite(latchPin, HIGH);
+
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit3] | (decimal3 ? B00000001 : 0));
+  digitalWrite(latchPin, HIGH);
+
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit2] | (decimal2 ? B00000001 : 0));
+  digitalWrite(latchPin, HIGH);
+
+  digitalWrite(latchPin, LOW);
+  shiftOut(dataPin, clockPin, LSBFIRST, segmentPatterns[digit1] | (decimal1 ? B00000001 : 0));
+  digitalWrite(latchPin, HIGH);
 }
+
