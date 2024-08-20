@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number generator for my 74HC595 library</title>
+    <style>
+        #output{
+            width: 256px;
+            height: 18px;
+        }
+    </style>
+</head>
+<body>
+    <p>This tool helps you to print your numbers that you want using 74HC595 to 7s display library.</p>
+    <input type="text" id="Number-to-show" placeholder="">
+    <p>Only numbers, dot, slash supported here!!! 4 numbers max!!!</p>
+    <button onclick="convert()">Convert</button>
+    <textarea name="Output" id="output" readonly></textarea>
+    <script>
+        function convert(){
+            var data = document.getElementById("Number-to-show").value;
+            console.log(data);
+            var a = data.length;
+            console.log(a);
+
+            const dotArray = [];
+            const numberArray = [];
+            
+            for (var i = 0; i < a; i++) {
+                if (data[i] === '.') {
+                    dotArray.push('.'); // Push a dot if it's found
+                } else if (i === a - 1 || data[i + 1] !== '.') {
+                    dotArray.push('/'); // Push a slash only if the next character is not a dot or if it's the last character
+                }
+                
+                if (!isNaN(data[i]) && data[i] !== ' ') {
+                    // Extract numbers
+                    if (numberArray.length === 0 || numberArray[numberArray.length - 1] !== data[i]) {
+                        numberArray.push(data[i]);
+                    }
+                }
+            }
+
+            console.log(`Dot array: ${dotArray.join('')}`);
+            console.log(`Number array: ${numberArray.join('')}`);
+
+            document.getElementById("output").value = `displayShowNumbers("${numberArray.join('')}", "${dotArray.join('')}");`; // Display results 
+        }
+    </script>
+</body>
+</html>
