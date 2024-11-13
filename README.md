@@ -75,8 +75,3 @@ void loop() {
     displayShowCharacter(0B11001100);    // Show a custom character pattern on the display
     delay(1000);
 }
-
-
----
-
-Feel free to reach out for any questions or feedback on using the library!
