@@ -59,7 +59,7 @@ clearDisplay();
 
 Here’s a quick example of how to use this library:
 
-``` arduino
+`
 #include "74HC595LED.h"  // Include the library
 
 void setup() {
@@ -76,3 +76,4 @@ void loop() {
     displayShowCharacter(0B11001100);    // Show a custom character pattern on the display
     delay(1000);
 }
+`
