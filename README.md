@@ -6,7 +6,7 @@ This library simplifies working with 7-segment displays, allowing you to easily 
 - **Update**: If you downloaded the library before November 12, please download it again for the latest features and bug fixes.
 - **Reserved Variables**: Avoid naming variables `dataPin`, `clockPin`, or `latchPin`, as these are used by the library. Set these using the `initReg()` function.
 - **Delay Between Functions**: Add a delay between function calls for correct number display.
-
+- **Hardware support**: This library is made for <a href="https://github.com/MidnightPavlaka635920/74HC595-PCB-project">my PCB project</a> specific!
 ## Installation
 
 1. Download the `.ZIP` file of this library.
