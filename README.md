@@ -6,4 +6,4 @@ If you downloaded library before November 12, download it again.
 Download .ZIP file. Then go to Arduino IDE, and add ZIP library.
 ## Functions
 In this library, there are 3 main functions:
-# displayShowNumbers("0000", "////");
+### displayShowNumbers("0000", "////");
