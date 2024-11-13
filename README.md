@@ -4,6 +4,8 @@ Use this tool to print your desired numbers: index.html file.
 -If you downloaded library before November 12, download it again.
 <br>
 -Do not make variables "dataPin", "clockPin" and "latchPin" cause they are used by library, but you can set them to their corresponding pins (initReg will have to be specified).
+<br>
+-Make delay between two functions for correct number showing!
 ## Installation
 Download .ZIP file. Then go to Arduino IDE, and add ZIP library.
 ## Functions
@@ -16,3 +18,6 @@ This function prints specified character in binary (e.g. 0B00000010). Note that 
 <br>
 ### initReg(2, 3, 4);
 Defines pins that are latch, clock and data pins in this order.
+<br>
+### clearDisplay();
+Clears whole display.
