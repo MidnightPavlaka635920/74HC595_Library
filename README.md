@@ -1,7 +1,8 @@
 If anyone ever wanted to make projects with 7 segment displays, I made an library for that.
 Use this tool to print your desired numbers: index.html file.
 ## Notes
-If you downloaded library before November 12, download it again.
+-If you downloaded library before November 12, download it again.
+-Do not make variables "dataPin", "clockPin" and "latchPin" cause they are used by library, but you can set it to their corresponding pins (initReg will have to be specified).
 ## Installation
 Download .ZIP file. Then go to Arduino IDE, and add ZIP library.
 ## Functions
