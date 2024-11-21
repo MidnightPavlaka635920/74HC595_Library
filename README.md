@@ -8,7 +8,7 @@ The Shift7Segment library simplifies working with 7-segment displays using shift
    - Customizable dot placement for each digit.
    - Easy initialization and display control.
 
-## Notes
+## Notes:
 
     - Hardware Compatibility: Designed specifically for this 74HC595 PCB project.
     - Reserved Variables: Avoid naming variables latchPin, clockPin, or dataPin, as these are managed by the library.
@@ -26,7 +26,7 @@ Creates an instance of the Shift7Segment library. Specify the pin numbers for la
 
 #### Example:
 
-Shift7Segment display(10, 11, 12); // Define latchPin, clockPin, dataPin
+```Shift7Segment display(10, 11, 12); // Define latchPin, clockPin, dataPin```
 
 init()
 
