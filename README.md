@@ -10,9 +10,9 @@ The Shift7Segment library simplifies working with 7-segment displays using shift
 
 ## Notes:
 
-    - Hardware Compatibility: Designed specifically for this 74HC595 PCB project.
-    - Reserved Variables: Avoid naming variables latchPin, clockPin, or dataPin, as these are managed by the library.
-    - Status: Fully functional and tested.
+   - Hardware Compatibility: Designed specifically for this 74HC595 PCB project.
+   - Reserved Variables: Avoid naming variables latchPin, clockPin, or dataPin, as these are managed by the library.
+   - Status: Fully functional and tested.
 
 ## Installation
 
