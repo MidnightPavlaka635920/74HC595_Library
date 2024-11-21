@@ -49,11 +49,13 @@ Displays numbers across 4 digits.
 
 ### displayShowCharacter(characterCode);
 
-Displays a custom character by specifying its binary or decimal code. For example, to display the hexadecimal character F, use 15.
+Displays a custom character by specifying its binary or decimal code. For example, to display the hexadecimal character F, use 15. You could use binary for specifying LEDs to light up.
 
 #### Example:
 
 ```display.displayShowCharacter(15); // Displays "F"```
+##### or
+```display.displayShowCharacter(0b11001100);```
 
 ### clearDisplay()
 
