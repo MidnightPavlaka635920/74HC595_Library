@@ -55,7 +55,7 @@ Displays a custom character by specifying its binary or decimal code. For exampl
 
 ```display.displayShowCharacter(15); // Displays "F"```
 ##### or
-```display.displayShowCharacter(0b11001100);```
+```display.displayShowCharacter(0b11001100);// Lights up custom segments```
 
 ### clearDisplay()
 
