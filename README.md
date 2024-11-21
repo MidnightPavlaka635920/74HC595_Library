@@ -1,79 +1,93 @@
-# 7-Segment Display Library for Arduino
+# Shift7Segment - 7-Segment Display Library for Arduino
 
-This library simplifies working with 7-segment displays, allowing you to easily display numbers and characters across multiple displays. Use the included `index.html` tool to test your desired numbers.
+The Shift7Segment library simplifies working with 7-segment displays using shift registers (e.g., 74HC595). This library allows you to display numbers and characters, manage dots, and clear the display effortlessly.
+## Features
+
+   - Control up to 4 digits using shift registers.
+   - Support for displaying numbers and characters.
+   - Customizable dot placement for each digit.
+   - Easy initialization and display control.
 
 ## Notes
-- **Update**: If you downloaded the library before November 12, please download it again for the latest features and bug fixes.
-- **Reserved Variables**: Avoid naming variables `dataPin`, `clockPin`, or `latchPin`, as these are used by the library. Set these using the `initReg()` function.
-- **Delay Between Functions**: Add a delay between function calls for correct number display.
-- **Hardware support**: This library is made for <a href="https://github.com/MidnightPavlaka635920/74HC595-PCB-project">my PCB project</a> specific! Avoid using on wrong hardware!
-- **Status**: Libary is working totaly fine!
-## Installation
 
-1. Download the `.ZIP` file of this library.
-2. Open the Arduino IDE, then go to **Sketch > Include Library > Add .ZIP Library...** and select the downloaded `.ZIP` file.
+    Hardware Compatibility: Designed specifically for this 74HC595 PCB project.
+    Reserved Variables: Avoid naming variables latchPin, clockPin, or dataPin, as these are managed by the library.
+    Status: Fully functional and tested.
 
-## Functions
+Installation
 
-The library includes the following main functions:
+    Download the .ZIP file of this library.
+    Open the Arduino IDE, then go to Sketch > Include Library > Add .ZIP Library... and select the downloaded .ZIP file.
 
-### `displayShowNumbers("0000", "////");`
+Functions
+Shift7Segment(latchPin, clockPin, dataPin)
 
-This function displays numbers across 4 segments. It takes two parameters:
-- **Numbers to show**: A string representing the numbers to display (e.g., `"1234"`).
-- **Dots**: A string to indicate where to add dots after each number. Use `"."` for a dot and `"/"` for no dot, repeated four times (e.g., `"././"` would add dots after the first and third numbers).
+Creates an instance of the Shift7Segment library. Specify the pin numbers for latch, clock, and data.
 
-**Example:**
-<textarea readonly>
-displayShowNumbers("1234", "././");
-</textarea>
+Example:
 
-### `displayShowCharacter(0B11001100);`
+Shift7Segment display(10, 11, 12); // Define latchPin, clockPin, dataPin
 
-This function displays a character on a single 7-segment display by specifying its binary pattern (e.g., `0B00000010`). The character will display on one segment, starting from the last segment display in the chain.
+init()
 
-**Example:**
-<textarea readonly>
-displayShowCharacter(0B11001100);
-</textarea>
+Initializes the pins and prepares the display for use. Call this function in setup().
 
-### `initReg(int latchPin, int clockPin, int dataPin);`
+Example:
 
-Initializes the **latch**, **clock**, and **data** pins in that order. Call this function before displaying numbers or characters.
+display.init();
 
-**Example:**
-<textarea readonly>
-initReg(2, 3, 4);
-</textarea>
+displayShowNumbers("0123", ".../");
 
-### `clearDisplay();`
+Displays numbers across 4 digits.
 
-Clears all segments on the display, turning off all lights.
+    Numbers to show: A string representing the numbers to display (e.g., "0123").
+    Dots: A string to indicate where to place dots. Use "." for a dot and "/" for no dot (e.g., "../." places dots on digits 1, 2, and 4).
 
-**Example:**
-<textarea readonly>
-clearDisplay();
-</textarea>
+Example:
 
-## Example Usage
+display.displayShowNumbers("0123", ".../");
 
-Here’s a quick example of how to use this library:
+displayShowCharacter(characterCode);
 
-```arduino
-#include "74HC595LED.h"  // Include the library
+Displays a custom character by specifying its binary or decimal code. For example, to display the hexadecimal character F, use 15.
+
+Example:
+
+display.displayShowCharacter(15); // Displays "F"
+
+clearDisplay()
+
+Clears all segments on the display, turning off all digits.
+
+Example:
+
+display.clearDisplay();
+
+Example Usage
+
+Here’s an example demonstrating the library's functionality:
+
+#include <Shift7Segment.h>
+
+// Define pins
+const int latchPin = 10;
+const int clockPin = 11;
+const int dataPin = 12;
+
+// Create an instance of Shift7Segment
+Shift7Segment display(latchPin, clockPin, dataPin);
 
 void setup() {
-    initReg(2, 3, 4); // Initialize pins (latch, clock, data)
-    clearDisplay();   // Clear the display
-    delay(500);       // Short delay
+    display.init();
+    display.displayShowNumbers("0123", ".../"); // Show "0123" with dots on first 3 digits
+    delay(2000);
+
+    display.clearDisplay(); // Clear the display
+    delay(1000);
+
+    display.displayShowCharacter(15); // Show "F"
 }
 
 void loop() {
-    displayShowNumbers("1234", "././");  // Display the number 1234 with dots after 1 and 3
-    delay(1000);                         // Delay to allow the display to hold
-    clearDisplay();                      // Clear display between numbers
-    delay(500);
-    displayShowCharacter(0B11001100);    // Show a custom character pattern on the display
-    delay(1000);
+    // Add further functionality here
 }
-
