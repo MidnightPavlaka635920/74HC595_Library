@@ -28,46 +28,46 @@ Creates an instance of the Shift7Segment library. Specify the pin numbers for la
 
 ```Shift7Segment display(10, 11, 12); // Define latchPin, clockPin, dataPin```
 
-init()
+### init()
 
 Initializes the pins and prepares the display for use. Call this function in setup().
 
-Example:
+#### Example:
 
-display.init();
+```display.init();```
 
-displayShowNumbers("0123", ".../");
+### displayShowNumbers("0123", ".../");
 
 Displays numbers across 4 digits.
 
-    Numbers to show: A string representing the numbers to display (e.g., "0123").
-    Dots: A string to indicate where to place dots. Use "." for a dot and "/" for no dot (e.g., "../." places dots on digits 1, 2, and 4).
+   Numbers to show: A string representing the numbers to display (e.g., "0123").
+   Dots: A string to indicate where to place dots. Use "." for a dot and "/" for no dot (e.g., "../." places dots on digits 1, 2, and 4).
 
-Example:
+#### Example:
 
-display.displayShowNumbers("0123", ".../");
+```display.displayShowNumbers("0123", ".../");```
 
-displayShowCharacter(characterCode);
+### displayShowCharacter(characterCode);
 
 Displays a custom character by specifying its binary or decimal code. For example, to display the hexadecimal character F, use 15.
 
-Example:
+#### Example:
 
-display.displayShowCharacter(15); // Displays "F"
+```display.displayShowCharacter(15); // Displays "F"```
 
-clearDisplay()
+### clearDisplay()
 
 Clears all segments on the display, turning off all digits.
 
-Example:
+#### Example:
 
-display.clearDisplay();
+```display.clearDisplay();```
 
 Example Usage
 
 Here’s an example demonstrating the library's functionality:
 
-#include <Shift7Segment.h>
+```#include <Shift7Segment.h>
 
 // Define pins
 const int latchPin = 10;
@@ -90,4 +90,4 @@ void setup() {
 
 void loop() {
     // Add further functionality here
-}
+}```
