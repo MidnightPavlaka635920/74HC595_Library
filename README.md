@@ -10,21 +10,21 @@ The Shift7Segment library simplifies working with 7-segment displays using shift
 
 ## Notes
 
-    Hardware Compatibility: Designed specifically for this 74HC595 PCB project.
-    Reserved Variables: Avoid naming variables latchPin, clockPin, or dataPin, as these are managed by the library.
-    Status: Fully functional and tested.
+    - Hardware Compatibility: Designed specifically for this 74HC595 PCB project.
+    - Reserved Variables: Avoid naming variables latchPin, clockPin, or dataPin, as these are managed by the library.
+    - Status: Fully functional and tested.
 
-Installation
+## Installation
 
-    Download the .ZIP file of this library.
-    Open the Arduino IDE, then go to Sketch > Include Library > Add .ZIP Library... and select the downloaded .ZIP file.
+   - Download the .ZIP file of this library.
+   - Open the Arduino IDE, then go to Sketch > Include Library > Add .ZIP Library... and select the downloaded .ZIP file.
 
-Functions
-Shift7Segment(latchPin, clockPin, dataPin)
+## Functions
+### Shift7Segment(latchPin, clockPin, dataPin)
 
 Creates an instance of the Shift7Segment library. Specify the pin numbers for latch, clock, and data.
 
-Example:
+#### Example:
 
 Shift7Segment display(10, 11, 12); // Define latchPin, clockPin, dataPin
 
